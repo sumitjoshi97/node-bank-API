@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// schema for bank-user details
 var BankSchema = new Schema({
 	'ac_no': {
 		type: String,
@@ -22,7 +23,8 @@ var Bank = module.exports = mongoose.model('Bank', BankSchema);
 
 // get bank details
 module.exports.getBankDetails = (ac, pass, callback) => {
-	Bank.findOne({"ac_no": ac,"password": pass }, callback);
+	let query = {"ac_no": ac,"password": pass };
+	Bank.findOne(query, callback);
 }
 
 //update credentials 
