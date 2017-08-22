@@ -40,7 +40,7 @@ app.put('/api/bank/:_id', (req, res) => {
 		name: req.body.name
 	}
 
-	Body.updateBankDetails(ac, body, (err, user) => {
+	Bank.updateBankDetails(ac, body, (err, user) => {
 		if(err)
 			throw err;
 		res.send(user);
