@@ -1,0 +1,9 @@
+{
+  "name": "node_bank_API",
+  "version": "0.0.1",
+  "description": "a bank api for proto bank app",
+  "main": "server.js",
+  "repository": "https://github.com/sumitjoshi97/node-bank-API",
+  "author": "Sj",
+  "license": "MIT"
+}
