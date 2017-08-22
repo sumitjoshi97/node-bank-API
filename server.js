@@ -1,8 +1,8 @@
 // init express
-const express =  require('express');
+const express = require('express');
 const app = express();
 
-// adding body parser
+// importing body parser
 const bodyParser = require('body-parser');
 
 // adding mongoose and connect to database
@@ -17,36 +17,44 @@ const port = process.env.PORT || 3000;
 // middleware
 app.use(bodyParser.json());
 
+// importing bank schema
 var Bank = require('./models/bank');
 
 // get bank details for one
 app.get('/api/bank/:_id', (req, res) => {
-	let ac = req.params._id;
-	let cred = ac.split('+');
-	//console.log(cred[0] + typeof(cred[0]) + " " + cred[1] + typeof(cred[1]));
-	//console.log(Bank.find());
-	Bank.getBankDetails(cred[0],cred[1], (err, user) => {
-		if(err)
-			throw err;
-		console.log(user)
-		res.send(user);
-	}) 
-})
+    let ac = req.params._id;
+    let cred = ac.split('+');
+    //console.log(cred[0] + typeof(cred[0]) + " " + cred[1] + typeof(cred[1]));
+    //console.log(Bank.find());
+    Bank.getBankDetails(cred[0], cred[1], (err, user) => {
+        if (err)
+            throw err;
+        console.log(user)
+        // posting user object
+        res.send(user);
+    });
+});
 
+
+// update user-bank details
 app.put('/api/bank/:_id', (req, res) => {
-	let ac = req.params._id;
-	let body = {
-		password: req.body.password,
-		name: req.body.name
-	}
+    let ac = req.params._id;
 
-	Bank.updateBankDetails(ac, body, (err, user) => {
-		if(err)
-			throw err;
-		res.send(user);
-	})
+    // save new password and name in object 'body'
+    let body = {
+        password: req.body.password,
+        name: req.body.name
+    }
+
+    // update bank details
+    Bank.updateBankDetails(ac, body, (err, user) => {
+        if (err)
+            throw err;
+        res.send(user);
+    })
 })
 
+// serving appication to port 
 app.listen(port, () => {
-	console.log('running at 3000')
+    console.log('running at 3000')
 })
