@@ -35,7 +35,17 @@ app.get('/api/bank/:_id', (req, res) => {
     });
 });
 
+// add new bank user
+app.post('/api/bank/', (req,res) => {
+	// saving all data in object body
+	let body = req.body;
 
+	Bank.addBankDetails(body, (err, user) => {
+		if(err)
+			throw err;
+		res.send(user);
+	})
+})
 // update user-bank details
 app.put('/api/bank/:_id', (req, res) => {
     let ac = req.params._id;

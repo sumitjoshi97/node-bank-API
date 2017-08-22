@@ -27,6 +27,11 @@ module.exports.getBankDetails = (ac, pass, callback) => {
     Bank.findOne(query, callback);
 }
 
+// add new bank bank-user
+module.exports.addBankDetails = (data, callback) => {
+	Bank.create(data, callback);
+}
+
 //update credentials 
 module.exports.updateBankDetails = (ac, details, callback) => {
     var query = { 'ac_no': ac };
