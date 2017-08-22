@@ -21,8 +21,18 @@ var BankSchema = new Schema({
 var Bank = module.exports = mongoose.model('Bank', BankSchema);
 
 // get bank details
-
 module.exports.getBankDetails = (ac, pass, callback) => {
 	Bank.findOne({"ac_no": ac,"password": pass }, callback);
 }
 
+//update credentials 
+module.exports.updateBankDetails = (ac, details, callback) => {
+	var query = {'ac_no': ac};
+
+	var update = {
+		password: details.password,
+		name: details.name
+	}
+
+	Bank.findOneAndUpdate(query, update, callback);
+}

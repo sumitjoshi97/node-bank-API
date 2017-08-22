@@ -33,6 +33,20 @@ app.get('/api/bank/:_id', (req, res) => {
 	}) 
 })
 
+app.put('/api/bank/:_id', (req, res) => {
+	let ac = req.params._id;
+	let body = {
+		password: req.body.password,
+		name: req.body.name
+	}
+
+	Body.updateBankDetails(ac, body, (err, user) => {
+		if(err)
+			throw err;
+		res.send(user);
+	})
+})
+
 app.listen(port, () => {
 	console.log('running at 3000')
 })
